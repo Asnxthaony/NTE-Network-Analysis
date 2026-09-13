@@ -20,7 +20,7 @@ type ClientLoginReq struct {
 	ClientVersion string
 	Username      string
 	Password      string
-	AuthType      int32
+	LoginType     int32
 	Unk1          string
 	GameId        string
 	ChannelId     string
@@ -40,7 +40,7 @@ func handleClientLoginReq(payload []byte) (*ClientLoginReq, error) {
 		ClientVersion: string(req.ClientVersion()),
 		Username:      string(req.Username()),
 		Password:      string(req.Password()),
-		AuthType:      req.AuthType(),
+		LoginType:     req.LoginType(),
 		Unk1:          string(req.Unk1()),
 		GameId:        string(req.GameId()),
 		ChannelId:     string(req.ChannelId()),

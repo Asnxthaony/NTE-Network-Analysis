@@ -65,7 +65,7 @@ func (rcv *ClientLoginReq) Password() []byte {
 	return nil
 }
 
-func (rcv *ClientLoginReq) AuthType() int32 {
+func (rcv *ClientLoginReq) LoginType() int32 {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(10))
 	if o != 0 {
 		return rcv._tab.GetInt32(o + rcv._tab.Pos)
@@ -73,7 +73,7 @@ func (rcv *ClientLoginReq) AuthType() int32 {
 	return 0
 }
 
-func (rcv *ClientLoginReq) MutateAuthType(n int32) bool {
+func (rcv *ClientLoginReq) MutateLoginType(n int32) bool {
 	return rcv._tab.MutateInt32Slot(10, n)
 }
 
@@ -169,8 +169,8 @@ func ClientLoginReqAddUsername(builder *flatbuffers.Builder, username flatbuffer
 func ClientLoginReqAddPassword(builder *flatbuffers.Builder, password flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(2, flatbuffers.UOffsetT(password), 0)
 }
-func ClientLoginReqAddAuthType(builder *flatbuffers.Builder, authType int32) {
-	builder.PrependInt32Slot(3, authType, 0)
+func ClientLoginReqAddLoginType(builder *flatbuffers.Builder, loginType int32) {
+	builder.PrependInt32Slot(3, loginType, 0)
 }
 func ClientLoginReqAddUnk1(builder *flatbuffers.Builder, unk1 flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(4, flatbuffers.UOffsetT(unk1), 0)

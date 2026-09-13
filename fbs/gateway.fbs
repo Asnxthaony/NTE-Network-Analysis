@@ -5,7 +5,7 @@ table ClientLoginReq {
   client_version: string; // 20191124
   username: string;       // 9_123456789
   password: string;       // token
-  auth_type: int;         // 2
+  login_type: int32;      // PwrdOneSDKLogin(2)
   unk1: string;           //
   game_id: string;        // 1289
   channel_id: string;     // laohu_9
