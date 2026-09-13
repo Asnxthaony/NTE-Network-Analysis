@@ -57,7 +57,7 @@ func handleClientLoginReq(payload []byte) (*ClientLoginReq, error) {
 // [1117] ClientTravelCmd
 
 type ClientTravelCmd struct {
-	Unk1        int32
+	LoginObjId  uint64
 	Uid         string
 	Unk2        int32
 	ActorTag    string
@@ -76,7 +76,7 @@ func handleClientTravelCmd(payload []byte) (*ClientTravelCmd, error) {
 	cmd := gateway.GetRootAsClientTravelCmd(payload, 0)
 
 	return &ClientTravelCmd{
-		Unk1:        cmd.Unk1(),
+		LoginObjId:  cmd.LoginObjId(),
 		Uid:         string(cmd.Uid()),
 		Unk2:        cmd.Unk2(),
 		ActorTag:    string(cmd.ActorTag()),

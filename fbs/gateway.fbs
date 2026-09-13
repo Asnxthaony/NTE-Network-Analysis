@@ -20,7 +20,7 @@ table ClientLoginReq {
 
 // MSG_ID: 1117
 table ClientTravelCmd {
-  unk1: int32;          // 114514
+  login_obj_id: uint64; // 114514
   uid: string;          // 9_123456789
   unk2: int32;          // 284
   actor_tag: string;    // TagOthers

@@ -41,16 +41,16 @@ func (rcv *ClientTravelCmd) Table() flatbuffers.Table {
 	return rcv._tab
 }
 
-func (rcv *ClientTravelCmd) Unk1() int32 {
+func (rcv *ClientTravelCmd) LoginObjId() uint64 {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(4))
 	if o != 0 {
-		return rcv._tab.GetInt32(o + rcv._tab.Pos)
+		return rcv._tab.GetUint64(o + rcv._tab.Pos)
 	}
 	return 0
 }
 
-func (rcv *ClientTravelCmd) MutateUnk1(n int32) bool {
-	return rcv._tab.MutateInt32Slot(4, n)
+func (rcv *ClientTravelCmd) MutateLoginObjId(n uint64) bool {
+	return rcv._tab.MutateUint64Slot(4, n)
 }
 
 func (rcv *ClientTravelCmd) Uid() []byte {
@@ -180,8 +180,8 @@ func (rcv *ClientTravelCmd) MutateUnk7(n int32) bool {
 func ClientTravelCmdStart(builder *flatbuffers.Builder) {
 	builder.StartObject(13)
 }
-func ClientTravelCmdAddUnk1(builder *flatbuffers.Builder, unk1 int32) {
-	builder.PrependInt32Slot(0, unk1, 0)
+func ClientTravelCmdAddLoginObjId(builder *flatbuffers.Builder, loginObjId uint64) {
+	builder.PrependUint64Slot(0, loginObjId, 0)
 }
 func ClientTravelCmdAddUid(builder *flatbuffers.Builder, uid flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(1, flatbuffers.UOffsetT(uid), 0)
