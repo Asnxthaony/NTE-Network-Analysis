@@ -1,0 +1,7 @@
+namespace packet;
+
+table PacketHead {
+  message_id:   int32;
+  header_len:   int32;
+  payload_len:  int32;
+}

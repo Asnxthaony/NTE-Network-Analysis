@@ -1,0 +1,6 @@
+namespace player_mgr;
+
+// MSG_ID: 2010
+table UpdateReconnectToken {
+  reconnect_token: string; // e8fd9275acbdbe2645656328913fb343
+}

@@ -1,0 +1,58 @@
+namespace gateway;
+
+// MSG_ID: 1106
+table ClientLoginReq {
+  client_version: string; // 20191124
+  username: string;       // 9_123456789
+  password: string;       // token
+  auth_type: int;         // 2
+  unk1: string;           //
+  game_id: string;        // 1289
+  channel_id: string;     // laohu_9
+  notice_channel: string; // 9_9
+  unk2: string;           //
+  client_wan_ip: string;  //
+  device_id_1: string;    //
+  device_id_2: string;    //
+  os_brand: string;       // Microsoft Windows 11 专业版
+  os_version: string;     // 10.0.26200
+}
+
+// MSG_ID: 1117
+table ClientTravelCmd {
+  unk1: int32;          // 114514
+  uid: string;          // 9_123456789
+  unk2: int32;          // 284
+  actor_tag: string;    // TagOthers
+  server_addr: string;  // 1.2.3.4:8888
+  location: string;     // X,Y,Z|Pitch,Yaw,Roll|ScaleX,ScaleY,ScaleZ
+  unk3: int32;          // 156
+  role_id: uint64;      // 2233****6666
+  character_bp: string; // /Game/Blueprints/Character/Player/player_010_nanally.player_010_nanally_C
+  unk_4: int32;         //
+  unk_5: int32;         //
+  unk_6: int32;         //
+  unk_7: int32;         // 75777
+}
+
+// MSG_ID: 1120
+table ServerVersionCmd {
+  server_version: string;       // 20200704
+  client_wan_ip: string;        // 8.8.8.8
+  client_wan_port: int32;       // 6666
+  heart_type: uint8;            // 1
+  heart_client_interval: int32; // 15
+  check_server_interval: int32; // 300
+  server_id: int32;             // 14001
+  server_time_utc: int64;       // 
+  server_time: int64;           // 
+  unk1: [ubyte];                // 
+  unk2: [ubyte];                // 
+}
+
+// MSG_ID: 1122
+table ServerKeepAliveCmd {
+  unk1: uint32;
+  server_time_utc: int64;
+  server_time: int64;
+}
