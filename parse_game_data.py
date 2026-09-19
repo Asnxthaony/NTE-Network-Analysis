@@ -1,4 +1,15 @@
 import struct
+from enum import IntEnum
+
+
+class RecordType(IntEnum):
+    INT32 = 2
+    INT64 = 3
+    UINT64 = 4
+    FLOAT = 5
+    DOUBLE = 6
+    STR = 7
+    WIDE_STR = 8
 
 
 class ParseError(Exception):
@@ -34,6 +45,12 @@ class CGameDataParser:
     def read_uint64(self) -> int:
         return struct.unpack_from("<Q", self.read_bytes(8))[0]
 
+    def read_float(self) -> float:
+        return struct.unpack_from("<f", self.read_bytes(4))[0]
+
+    def read_double(self) -> float:
+        return struct.unpack_from("<d", self.read_bytes(8))[0]
+
     def read_utf8(self) -> str:
         len = self.read_uint32()
         data = self.read_bytes(len)
@@ -53,25 +70,25 @@ class CGameDataParser:
             attr_value_type = self.read_int32()
 
             attr_value = None
-            if attr_value_type == 2:
+            if attr_value_type == RecordType.INT32:
                 attr_value = self.read_int32()
                 self.read_uint8()
-            elif attr_value_type == 3:
+            elif attr_value_type == RecordType.INT64:
                 attr_value = self.read_int64()
                 self.read_uint8()
-            elif attr_value_type == 4:
+            elif attr_value_type == RecordType.UINT64:
                 attr_value = self.read_uint64()
                 self.read_uint8()
-            elif attr_value_type == 5:
-                self.read_bytes(4)
+            elif attr_value_type == RecordType.FLOAT:
+                attr_value = self.read_float()
                 self.read_uint8()
-            elif attr_value_type == 6:
-                self.read_bytes(8)
+            elif attr_value_type == RecordType.DOUBLE:
+                attr_value = self.read_double()
                 self.read_uint8()
-            elif attr_value_type == 7:
-                attr_value = self.read_int32()
+            elif attr_value_type == RecordType.STR:
+                attr_value = self.read_utf8()
                 self.read_uint8()
-            elif attr_value_type == 8:
+            elif attr_value_type == RecordType.WIDE_STR:
                 attr_value = self.read_utf16()
                 self.read_uint8()
             else:
@@ -118,19 +135,19 @@ class CGameDataParser:
             row = []
             for c in range(col_count):
                 t = col_types[c]
-                if t == 2:
+                if t == RecordType.INT32:
                     val = self.read_int32()
-                elif t == 3:
+                elif t == RecordType.INT64:
                     val = self.read_int64()
-                elif t == 4:
+                elif t == RecordType.UINT64:
                     val = self.read_uint64()
-                elif t == 5:
-                    val = self.read_int32()
-                elif t == 6:
-                    val = self.read_int64()
-                elif t == 7:
+                elif t == RecordType.FLOAT:
+                    val = self.read_float()
+                elif t == RecordType.DOUBLE:
+                    val = self.read_double()
+                elif t == RecordType.STR:
                     val = self.read_utf8()
-                elif t == 8:
+                elif t == RecordType.WIDE_STR:
                     val = self.read_utf16()
                 else:
                     print(f"    Unknown column type {t}: row={r}, col={c}")
