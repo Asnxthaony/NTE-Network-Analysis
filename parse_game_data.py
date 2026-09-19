@@ -31,6 +31,9 @@ class CGameDataParser:
     def read_uint8(self) -> int:
         return struct.unpack_from("<B", self.read_bytes(1))[0]
 
+    def read_uint64(self) -> int:
+        return struct.unpack_from("<Q", self.read_bytes(8))[0]
+
     def read_utf8(self) -> str:
         len = self.read_uint32()
         data = self.read_bytes(len)
@@ -53,8 +56,11 @@ class CGameDataParser:
             if attr_value_type == 2:
                 attr_value = self.read_int32()
                 self.read_uint8()
-            elif attr_value_type == 3 or attr_value_type == 4:
+            elif attr_value_type == 3:
                 attr_value = self.read_int64()
+                self.read_uint8()
+            elif attr_value_type == 4:
+                attr_value = self.read_uint64()
                 self.read_uint8()
             elif attr_value_type == 5:
                 self.read_bytes(4)
@@ -114,8 +120,10 @@ class CGameDataParser:
                 t = col_types[c]
                 if t == 2:
                     val = self.read_int32()
-                elif t == 3 or t == 4:
+                elif t == 3:
                     val = self.read_int64()
+                elif t == 4:
+                    val = self.read_uint64()
                 elif t == 5:
                     val = self.read_int32()
                 elif t == 6:
@@ -134,7 +142,7 @@ class CGameDataParser:
 
         for r, row in enumerate(rows):
             # for c, item in enumerate(row):
-            #     print(f"    Col[{c}]: {item['value']}")
+            #     print(f"    Col[{c}]: {item['type']} {item['value']}")
 
             print(f"    Row[{r}]: {[str(item['value']) for item in row]}")
 
