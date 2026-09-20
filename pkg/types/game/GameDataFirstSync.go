@@ -53,7 +53,7 @@ func (rcv *GameDataFirstSync) MutateRoleId(n uint64) bool {
 	return rcv._tab.MutateUint64Slot(4, n)
 }
 
-func (rcv *GameDataFirstSync) Unk1(j int) byte {
+func (rcv *GameDataFirstSync) GameData(j int) byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
 	if o != 0 {
 		a := rcv._tab.Vector(o)
@@ -62,7 +62,7 @@ func (rcv *GameDataFirstSync) Unk1(j int) byte {
 	return 0
 }
 
-func (rcv *GameDataFirstSync) Unk1Length() int {
+func (rcv *GameDataFirstSync) GameDataLength() int {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
 	if o != 0 {
 		return rcv._tab.VectorLen(o)
@@ -70,7 +70,7 @@ func (rcv *GameDataFirstSync) Unk1Length() int {
 	return 0
 }
 
-func (rcv *GameDataFirstSync) Unk1Bytes() []byte {
+func (rcv *GameDataFirstSync) GameDataBytes() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -78,7 +78,7 @@ func (rcv *GameDataFirstSync) Unk1Bytes() []byte {
 	return nil
 }
 
-func (rcv *GameDataFirstSync) MutateUnk1(j int, n byte) bool {
+func (rcv *GameDataFirstSync) MutateGameData(j int, n byte) bool {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
 	if o != 0 {
 		a := rcv._tab.Vector(o)
@@ -93,10 +93,10 @@ func GameDataFirstSyncStart(builder *flatbuffers.Builder) {
 func GameDataFirstSyncAddRoleId(builder *flatbuffers.Builder, roleId uint64) {
 	builder.PrependUint64Slot(0, roleId, 0)
 }
-func GameDataFirstSyncAddUnk1(builder *flatbuffers.Builder, unk1 flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(1, flatbuffers.UOffsetT(unk1), 0)
+func GameDataFirstSyncAddGameData(builder *flatbuffers.Builder, gameData flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(1, flatbuffers.UOffsetT(gameData), 0)
 }
-func GameDataFirstSyncStartUnk1Vector(builder *flatbuffers.Builder, numElems int) flatbuffers.UOffsetT {
+func GameDataFirstSyncStartGameDataVector(builder *flatbuffers.Builder, numElems int) flatbuffers.UOffsetT {
 	return builder.StartVector(1, numElems, 1)
 }
 func GameDataFirstSyncEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {

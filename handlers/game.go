@@ -28,6 +28,6 @@ func handleGameDataFirstSync(payload []byte) (*GameDataFirstSync, error) {
 
 	return &GameDataFirstSync{
 		RoleId:   cmd.RoleId(),
-		GameData: cmd.Unk1Bytes(),
+		GameData: cmd.GameDataBytes(),
 	}, nil
 }
