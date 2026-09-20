@@ -53,16 +53,38 @@ func (rcv *GameDataFirstSync) MutateRoleId(n uint64) bool {
 	return rcv._tab.MutateUint64Slot(4, n)
 }
 
-func (rcv *GameDataFirstSync) Unk1() int32 {
+func (rcv *GameDataFirstSync) Unk1(j int) byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
 	if o != 0 {
-		return rcv._tab.GetInt32(o + rcv._tab.Pos)
+		a := rcv._tab.Vector(o)
+		return rcv._tab.GetByte(a + flatbuffers.UOffsetT(j*1))
 	}
 	return 0
 }
 
-func (rcv *GameDataFirstSync) MutateUnk1(n int32) bool {
-	return rcv._tab.MutateInt32Slot(6, n)
+func (rcv *GameDataFirstSync) Unk1Length() int {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
+	if o != 0 {
+		return rcv._tab.VectorLen(o)
+	}
+	return 0
+}
+
+func (rcv *GameDataFirstSync) Unk1Bytes() []byte {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
+	if o != 0 {
+		return rcv._tab.ByteVector(o + rcv._tab.Pos)
+	}
+	return nil
+}
+
+func (rcv *GameDataFirstSync) MutateUnk1(j int, n byte) bool {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
+	if o != 0 {
+		a := rcv._tab.Vector(o)
+		return rcv._tab.MutateByte(a+flatbuffers.UOffsetT(j*1), n)
+	}
+	return false
 }
 
 func GameDataFirstSyncStart(builder *flatbuffers.Builder) {
@@ -71,8 +93,11 @@ func GameDataFirstSyncStart(builder *flatbuffers.Builder) {
 func GameDataFirstSyncAddRoleId(builder *flatbuffers.Builder, roleId uint64) {
 	builder.PrependUint64Slot(0, roleId, 0)
 }
-func GameDataFirstSyncAddUnk1(builder *flatbuffers.Builder, unk1 int32) {
-	builder.PrependInt32Slot(1, unk1, 0)
+func GameDataFirstSyncAddUnk1(builder *flatbuffers.Builder, unk1 flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(1, flatbuffers.UOffsetT(unk1), 0)
+}
+func GameDataFirstSyncStartUnk1Vector(builder *flatbuffers.Builder, numElems int) flatbuffers.UOffsetT {
+	return builder.StartVector(1, numElems, 1)
 }
 func GameDataFirstSyncEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()

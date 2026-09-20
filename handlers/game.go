@@ -14,8 +14,8 @@ func init() {
 // [1649] GameDataFirstSync
 
 type GameDataFirstSync struct {
-	RoleId uint64
-	Unk1   int32
+	RoleId   uint64
+	GameData []byte
 }
 
 func handleGameDataFirstSync(payload []byte) (*GameDataFirstSync, error) {
@@ -27,7 +27,7 @@ func handleGameDataFirstSync(payload []byte) (*GameDataFirstSync, error) {
 	cmd := game.GetRootAsGameDataFirstSync(data, 0)
 
 	return &GameDataFirstSync{
-		RoleId: cmd.RoleId(),
-		Unk1:   cmd.Unk1(),
+		RoleId:   cmd.RoleId(),
+		GameData: cmd.Unk1Bytes(),
 	}, nil
 }

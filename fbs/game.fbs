@@ -3,5 +3,5 @@ namespace game;
 // MSG_ID: 1649
 table GameDataFirstSync {
   role_id: uint64;
-  unk1: int32;
+  game_data: [ubyte];
 }
