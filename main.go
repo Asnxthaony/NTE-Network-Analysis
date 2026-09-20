@@ -18,6 +18,7 @@ func main() {
 		"data/05_1122_ServerKeepAliveCmd.bin",
 		"data/06_1649_GameDataFirstSync.bin",
 		"data/07_1649_GameDataFirstSync.bin",
+		"data/08_1121_ClientKeepAliveCmd.bin",
 	}
 
 	for _, f := range files {
@@ -30,5 +31,4 @@ func main() {
 		jsonData, err := json.MarshalIndent(res.Body, "", "  ")
 		fmt.Println(string(jsonData))
 	}
-
 }

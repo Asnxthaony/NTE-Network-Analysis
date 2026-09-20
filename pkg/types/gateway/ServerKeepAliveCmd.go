@@ -41,7 +41,7 @@ func (rcv *ServerKeepAliveCmd) Table() flatbuffers.Table {
 	return rcv._tab
 }
 
-func (rcv *ServerKeepAliveCmd) Unk1() uint32 {
+func (rcv *ServerKeepAliveCmd) ServerTick() uint32 {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(4))
 	if o != 0 {
 		return rcv._tab.GetUint32(o + rcv._tab.Pos)
@@ -49,7 +49,7 @@ func (rcv *ServerKeepAliveCmd) Unk1() uint32 {
 	return 0
 }
 
-func (rcv *ServerKeepAliveCmd) MutateUnk1(n uint32) bool {
+func (rcv *ServerKeepAliveCmd) MutateServerTick(n uint32) bool {
 	return rcv._tab.MutateUint32Slot(4, n)
 }
 
@@ -80,8 +80,8 @@ func (rcv *ServerKeepAliveCmd) MutateServerTime(n int64) bool {
 func ServerKeepAliveCmdStart(builder *flatbuffers.Builder) {
 	builder.StartObject(3)
 }
-func ServerKeepAliveCmdAddUnk1(builder *flatbuffers.Builder, unk1 uint32) {
-	builder.PrependUint32Slot(0, unk1, 0)
+func ServerKeepAliveCmdAddServerTick(builder *flatbuffers.Builder, serverTick uint32) {
+	builder.PrependUint32Slot(0, serverTick, 0)
 }
 func ServerKeepAliveCmdAddServerTimeUtc(builder *flatbuffers.Builder, serverTimeUtc int64) {
 	builder.PrependInt64Slot(1, serverTimeUtc, 0)

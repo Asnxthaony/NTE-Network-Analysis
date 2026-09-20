@@ -11,6 +11,7 @@ func init() {
 	Register(1106, handleClientLoginReq)
 	Register(1117, handleClientTravelCmd)
 	Register(1120, handleServerVersionCmd)
+	Register(1121, handleClientKeepAliveCmd)
 	Register(1122, handleServerKeepAliveCmd)
 }
 
@@ -59,17 +60,18 @@ func handleClientLoginReq(payload []byte) (*ClientLoginReq, error) {
 type ClientTravelCmd struct {
 	LoginObjId  uint64
 	Uid         string
-	Unk2        int32
+	Unk2        string
 	ActorTag    string
 	ServerAddr  string
 	Location    string
-	Unk3        int32
+	Unk3        string
 	RoleId      uint64
 	CharacterBp string
-	Unk4        int32
+	Unk4        string
 	Unk5        int32
 	Unk6        int32
-	Unk7        int32
+	Unk7        bool
+	Unk8        int32
 }
 
 func handleClientTravelCmd(payload []byte) (*ClientTravelCmd, error) {
@@ -78,17 +80,18 @@ func handleClientTravelCmd(payload []byte) (*ClientTravelCmd, error) {
 	return &ClientTravelCmd{
 		LoginObjId:  cmd.LoginObjId(),
 		Uid:         string(cmd.Uid()),
-		Unk2:        cmd.Unk2(),
+		Unk2:        string(cmd.Unk2()),
 		ActorTag:    string(cmd.ActorTag()),
 		ServerAddr:  string(cmd.ServerAddr()),
 		Location:    string(cmd.Location()),
-		Unk3:        cmd.Unk3(),
+		Unk3:        string(cmd.Unk3()),
 		RoleId:      cmd.RoleId(),
 		CharacterBp: string(cmd.CharacterBp()),
-		Unk4:        cmd.Unk4(),
+		Unk4:        string(cmd.Unk4()),
 		Unk5:        cmd.Unk5(),
 		Unk6:        cmd.Unk6(),
 		Unk7:        cmd.Unk7(),
+		Unk8:        cmd.Unk8(),
 	}, nil
 }
 
@@ -104,8 +107,7 @@ type ServerVersionCmd struct {
 	ServerId            int32
 	ServerTimeUtc       time.Time
 	ServerTime          time.Time
-	Unk1                []byte
-	Unk2                []byte
+	Unk1                string
 }
 
 func handleServerVersionCmd(payload []byte) (*ServerVersionCmd, error) {
@@ -121,15 +123,28 @@ func handleServerVersionCmd(payload []byte) (*ServerVersionCmd, error) {
 		ServerId:            cmd.ServerId(),
 		ServerTimeUtc:       util.TicksToUnixTime(cmd.ServerTimeUtc()),
 		ServerTime:          util.TicksToUnixTime(cmd.ServerTime()),
-		Unk1:                cmd.Unk1Bytes(),
-		Unk2:                cmd.Unk2Bytes(),
+		Unk1:                string(cmd.Unk1()),
+	}, nil
+}
+
+// [1121] ClientKeepAliveCmd
+
+type ClientKeepAliveCmd struct {
+	ClientTick uint32
+}
+
+func handleClientKeepAliveCmd(payload []byte) (*ClientKeepAliveCmd, error) {
+	cmd := gateway.GetRootAsClientKeepAliveCmd(payload, 0)
+
+	return &ClientKeepAliveCmd{
+		ClientTick: cmd.ClientTick(),
 	}, nil
 }
 
 // [1122] ServerKeepAliveCmd
 
 type ServerKeepAliveCmd struct {
-	Unk1          uint32
+	ServerTick    uint32
 	ServerTimeUtc time.Time
 	ServerTime    time.Time
 }
@@ -138,7 +153,7 @@ func handleServerKeepAliveCmd(payload []byte) (*ServerKeepAliveCmd, error) {
 	cmd := gateway.GetRootAsServerKeepAliveCmd(payload, 0)
 
 	return &ServerKeepAliveCmd{
-		Unk1:          cmd.Unk1(),
+		ServerTick:    cmd.ServerTick(),
 		ServerTimeUtc: util.TicksToUnixTime(cmd.ServerTimeUtc()),
 		ServerTime:    util.TicksToUnixTime(cmd.ServerTime()),
 	}, nil
