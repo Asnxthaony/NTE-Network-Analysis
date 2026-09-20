@@ -107,7 +107,8 @@ type ServerVersionCmd struct {
 	ServerId            int32
 	ServerTimeUtc       time.Time
 	ServerTime          time.Time
-	Unk1                string
+	Unk1                []byte
+	Unk2                string
 }
 
 func handleServerVersionCmd(payload []byte) (*ServerVersionCmd, error) {
@@ -123,7 +124,8 @@ func handleServerVersionCmd(payload []byte) (*ServerVersionCmd, error) {
 		ServerId:            cmd.ServerId(),
 		ServerTimeUtc:       util.TicksToUnixTime(cmd.ServerTimeUtc()),
 		ServerTime:          util.TicksToUnixTime(cmd.ServerTime()),
-		Unk1:                string(cmd.Unk1()),
+		Unk1:                cmd.Unk1Bytes(),
+		Unk2:                string(cmd.Unk2()),
 	}, nil
 }
 

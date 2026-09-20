@@ -47,7 +47,8 @@ table ServerVersionCmd {
   server_id: int32;             // 14001
   server_time_utc: int64;       // 
   server_time: int64;           // 
-  unk1: string;                 // 
+  unk1: [ubyte];                // 
+  unk2: string;                 // 
 }
 
 // MSG_ID: 1121

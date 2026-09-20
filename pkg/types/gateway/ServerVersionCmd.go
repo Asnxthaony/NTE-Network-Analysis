@@ -141,7 +141,24 @@ func (rcv *ServerVersionCmd) MutateServerTime(n int64) bool {
 	return rcv._tab.MutateInt64Slot(20, n)
 }
 
-func (rcv *ServerVersionCmd) Unk1() []byte {
+func (rcv *ServerVersionCmd) Unk1(j int) byte {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(22))
+	if o != 0 {
+		a := rcv._tab.Vector(o)
+		return rcv._tab.GetByte(a + flatbuffers.UOffsetT(j*1))
+	}
+	return 0
+}
+
+func (rcv *ServerVersionCmd) Unk1Length() int {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(22))
+	if o != 0 {
+		return rcv._tab.VectorLen(o)
+	}
+	return 0
+}
+
+func (rcv *ServerVersionCmd) Unk1Bytes() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(22))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -149,8 +166,25 @@ func (rcv *ServerVersionCmd) Unk1() []byte {
 	return nil
 }
 
+func (rcv *ServerVersionCmd) MutateUnk1(j int, n byte) bool {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(22))
+	if o != 0 {
+		a := rcv._tab.Vector(o)
+		return rcv._tab.MutateByte(a+flatbuffers.UOffsetT(j*1), n)
+	}
+	return false
+}
+
+func (rcv *ServerVersionCmd) Unk2() []byte {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(24))
+	if o != 0 {
+		return rcv._tab.ByteVector(o + rcv._tab.Pos)
+	}
+	return nil
+}
+
 func ServerVersionCmdStart(builder *flatbuffers.Builder) {
-	builder.StartObject(10)
+	builder.StartObject(11)
 }
 func ServerVersionCmdAddServerVersion(builder *flatbuffers.Builder, serverVersion flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(0, flatbuffers.UOffsetT(serverVersion), 0)
@@ -181,6 +215,12 @@ func ServerVersionCmdAddServerTime(builder *flatbuffers.Builder, serverTime int6
 }
 func ServerVersionCmdAddUnk1(builder *flatbuffers.Builder, unk1 flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(9, flatbuffers.UOffsetT(unk1), 0)
+}
+func ServerVersionCmdStartUnk1Vector(builder *flatbuffers.Builder, numElems int) flatbuffers.UOffsetT {
+	return builder.StartVector(1, numElems, 1)
+}
+func ServerVersionCmdAddUnk2(builder *flatbuffers.Builder, unk2 flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(10, flatbuffers.UOffsetT(unk2), 0)
 }
 func ServerVersionCmdEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
