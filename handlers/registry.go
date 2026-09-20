@@ -19,4 +19,4 @@ func Get(id int32) (Entry, bool) {
 	return e, ok
 }
 
-var ErrUnknownMessage = errors.New("unknown message id")
+var ErrUnknownMessage = errors.New("unknown message")

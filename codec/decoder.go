@@ -2,7 +2,6 @@ package codec
 
 import (
 	"encoding/binary"
-	"errors"
 	"fmt"
 	"os"
 
@@ -25,22 +24,22 @@ func Decode(filename string) (*Result, error) {
 
 func DecodeBytes(buf []byte) (*Result, error) {
 	if len(buf) < 4 {
-		return nil, errors.New("packet too short")
+		return nil, ErrPacketTooShort
 	}
 
-	packetLen := int(binary.LittleEndian.Uint32(buf[:4]))
+	packetLen := int32(binary.LittleEndian.Uint32(buf[:4]))
 	packetBuf := buf[4:]
-	if packetLen > len(packetBuf) {
-		return nil, errors.New("packet length mismatch")
+	if int(packetLen) > len(packetBuf) {
+		return nil, ErrPacketLenMismatch
 	}
 	packetBuf = packetBuf[:packetLen]
 
 	head := packet.GetRootAsPacketHead(packetBuf, 0)
 	messageID := head.MessageId()
-	payloadLen := int(head.PayloadLen())
+	payloadLen := head.PayloadLen()
 
 	offset := packetLen - payloadLen
-	payload := packetBuf[offset : offset+payloadLen]
+	payload := packetBuf[offset:]
 
 	h, ok := handlers.Get(messageID)
 	if !ok {
