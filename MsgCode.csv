@@ -17,7 +17,9 @@
 64,ChargeMsg_QueryChargeDataRes
 65,ChargeMsg_UpdateGmInfoList
 66,ChargeMsg_SendCloudTime
-67,ChargeMsg_Max
+67,ChargeMsg_QueryAnnulithReq
+68,ChargeMsg_QueryAnnulithRes
+69,ChargeMsg_Max
 
 100,DispatchMsg_Base
 101,DispatchMsg_Register_Req
@@ -480,7 +482,9 @@
 2516,Rank_UpdateRecordPlayer
 2517,Rank_GetSettlementTimes_Req
 2518,Rank_GetSettlementTimes_Res
-2519,Rank_Max
+2519,Rank_GetRecordPercent_Req
+2520,Rank_GetRecordPercent_Res
+2521,Rank_Max
 
 2600,Person_Base
 2601,Person_SavePerson_Req
@@ -543,7 +547,9 @@
 4514,UserCache_WriteChargeData
 4515,UserCache_ReadChargeDataReq
 4516,UserCache_ReadChargeDataRes
-4517,UserCache_Max
+4517,UserCache_RecommendRoleListReq
+4518,UserCache_RecommendRoleListRes
+4519,UserCache_Max
 
 4700,OnlineSys_Base
 4701,OnlineSys_OnPlayerOnlineReq

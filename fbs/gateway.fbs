@@ -18,6 +18,11 @@ table ClientLoginReq {
   os_version: string;     // 10.0.26200
 }
 
+// MSG_ID: 1113
+table ServerErrorMsgCmd {
+  error_msg: string; // LoginAuthRes Failed
+}
+
 // MSG_ID: 1117
 table ClientTravelCmd {
   login_obj_id: uint64; // 114514

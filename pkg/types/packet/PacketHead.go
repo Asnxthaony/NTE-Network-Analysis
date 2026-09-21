@@ -41,7 +41,7 @@ func (rcv *PacketHead) Table() flatbuffers.Table {
 	return rcv._tab
 }
 
-func (rcv *PacketHead) MessageId() int32 {
+func (rcv *PacketHead) MsgCode() int32 {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(4))
 	if o != 0 {
 		return rcv._tab.GetInt32(o + rcv._tab.Pos)
@@ -49,11 +49,11 @@ func (rcv *PacketHead) MessageId() int32 {
 	return 0
 }
 
-func (rcv *PacketHead) MutateMessageId(n int32) bool {
+func (rcv *PacketHead) MutateMsgCode(n int32) bool {
 	return rcv._tab.MutateInt32Slot(4, n)
 }
 
-func (rcv *PacketHead) HeaderLen() int32 {
+func (rcv *PacketHead) ErrorCode() int32 {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
 	if o != 0 {
 		return rcv._tab.GetInt32(o + rcv._tab.Pos)
@@ -61,11 +61,11 @@ func (rcv *PacketHead) HeaderLen() int32 {
 	return 0
 }
 
-func (rcv *PacketHead) MutateHeaderLen(n int32) bool {
+func (rcv *PacketHead) MutateErrorCode(n int32) bool {
 	return rcv._tab.MutateInt32Slot(6, n)
 }
 
-func (rcv *PacketHead) PayloadLen() int32 {
+func (rcv *PacketHead) MsgSize() int32 {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(8))
 	if o != 0 {
 		return rcv._tab.GetInt32(o + rcv._tab.Pos)
@@ -73,21 +73,21 @@ func (rcv *PacketHead) PayloadLen() int32 {
 	return 0
 }
 
-func (rcv *PacketHead) MutatePayloadLen(n int32) bool {
+func (rcv *PacketHead) MutateMsgSize(n int32) bool {
 	return rcv._tab.MutateInt32Slot(8, n)
 }
 
 func PacketHeadStart(builder *flatbuffers.Builder) {
 	builder.StartObject(3)
 }
-func PacketHeadAddMessageId(builder *flatbuffers.Builder, messageId int32) {
-	builder.PrependInt32Slot(0, messageId, 0)
+func PacketHeadAddMsgCode(builder *flatbuffers.Builder, msgCode int32) {
+	builder.PrependInt32Slot(0, msgCode, 0)
 }
-func PacketHeadAddHeaderLen(builder *flatbuffers.Builder, headerLen int32) {
-	builder.PrependInt32Slot(1, headerLen, 0)
+func PacketHeadAddErrorCode(builder *flatbuffers.Builder, errorCode int32) {
+	builder.PrependInt32Slot(1, errorCode, 0)
 }
-func PacketHeadAddPayloadLen(builder *flatbuffers.Builder, payloadLen int32) {
-	builder.PrependInt32Slot(2, payloadLen, 0)
+func PacketHeadAddMsgSize(builder *flatbuffers.Builder, msgSize int32) {
+	builder.PrependInt32Slot(2, msgSize, 0)
 }
 func PacketHeadEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()

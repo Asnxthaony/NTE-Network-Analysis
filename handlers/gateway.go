@@ -9,6 +9,7 @@ import (
 
 func init() {
 	Register(1106, handleClientLoginReq)
+	Register(1113, handleServerErrorMsgCmd)
 	Register(1117, handleClientTravelCmd)
 	Register(1120, handleServerVersionCmd)
 	Register(1121, handleClientKeepAliveCmd)
@@ -52,6 +53,20 @@ func handleClientLoginReq(payload []byte) (*ClientLoginReq, error) {
 		DeviceId2:     string(req.DeviceId2()),
 		OsBrand:       string(req.OsBrand()),
 		OsVersion:     string(req.OsVersion()),
+	}, nil
+}
+
+// [1113] ServerErrorMsgCmd
+
+type ServerErrorMsgCmd struct {
+	ErrorMsg string
+}
+
+func handleServerErrorMsgCmd(payload []byte) (*ServerErrorMsgCmd, error) {
+	cmd := gateway.GetRootAsServerErrorMsgCmd(payload, 0)
+
+	return &ServerErrorMsgCmd{
+		ErrorMsg: string(cmd.ErrorMsg()),
 	}, nil
 }
 

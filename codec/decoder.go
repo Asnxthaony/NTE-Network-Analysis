@@ -10,7 +10,8 @@ import (
 )
 
 type Result struct {
-	MessageID int32 `json:"message_id"`
+	MsgCode   int32 `json:"msg_code"`
+	ErrorCode int32 `json:"error_code,omitempty"`
 	Body      any   `json:"body"`
 }
 
@@ -35,15 +36,16 @@ func DecodeBytes(buf []byte) (*Result, error) {
 	packetBuf = packetBuf[:packetLen]
 
 	head := packet.GetRootAsPacketHead(packetBuf, 0)
-	messageID := head.MessageId()
-	payloadLen := head.PayloadLen()
+	msgCode := head.MsgCode()
+	errorCode := head.ErrorCode()
+	msgSize := head.MsgSize()
 
-	offset := packetLen - payloadLen
+	offset := packetLen - msgSize
 	payload := packetBuf[offset:]
 
-	h, ok := handlers.Get(messageID)
+	h, ok := handlers.Get(msgCode)
 	if !ok {
-		return nil, fmt.Errorf("%w: %d", handlers.ErrUnknownMessage, messageID)
+		return nil, fmt.Errorf("%w: %d", handlers.ErrUnknownMessage, msgCode)
 	}
 
 	msg, err := h.Parse(payload)
@@ -51,5 +53,9 @@ func DecodeBytes(buf []byte) (*Result, error) {
 		return nil, err
 	}
 
-	return &Result{MessageID: messageID, Body: msg}, nil
+	return &Result{
+		MsgCode:   msgCode,
+		ErrorCode: errorCode,
+		Body:      msg,
+	}, nil
 }
