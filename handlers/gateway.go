@@ -31,8 +31,12 @@ type ClientLoginReq struct {
 	ClientWanIp   string
 	DeviceId1     string
 	DeviceId2     string
-	OsBrand       string
+	DeviceModel   string
 	OsVersion     string
+	Memory        int32
+	OsType        int32
+	Unk5          int32
+	Unk6          string
 }
 
 func handleClientLoginReq(payload []byte) (*ClientLoginReq, error) {
@@ -51,8 +55,12 @@ func handleClientLoginReq(payload []byte) (*ClientLoginReq, error) {
 		ClientWanIp:   string(req.ClientWanIp()),
 		DeviceId1:     string(req.DeviceId1()),
 		DeviceId2:     string(req.DeviceId2()),
-		OsBrand:       string(req.OsBrand()),
+		DeviceModel:   string(req.DeviceModel()),
 		OsVersion:     string(req.OsVersion()),
+		Memory:        req.Memory(),
+		OsType:        req.OsType(),
+		Unk5:          req.Unk5(),
+		Unk6:          string(req.Unk6()),
 	}, nil
 }
 

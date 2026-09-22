@@ -14,8 +14,12 @@ table ClientLoginReq {
   client_wan_ip: string;  //
   device_id_1: string;    //
   device_id_2: string;    //
-  os_brand: string;       // Microsoft Windows 11 专业版
-  os_version: string;     // 10.0.26200
+  device_model: string;   // Microsoft Windows 11 专业版 / 2512BPNDAC
+  os_version: string;     // 10.0.26200 / 17
+  memory: int32;          // MemStats.AvailablePhysical
+  os_type: int32;         // IOS(1), Android(2), PC(4), Harmony(18)
+  unk5: int32;            //
+  unk6: string;           //
 }
 
 // MSG_ID: 1113

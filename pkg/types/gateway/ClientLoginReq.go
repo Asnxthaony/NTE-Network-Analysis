@@ -141,7 +141,7 @@ func (rcv *ClientLoginReq) DeviceId2() []byte {
 	return nil
 }
 
-func (rcv *ClientLoginReq) OsBrand() []byte {
+func (rcv *ClientLoginReq) DeviceModel() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(28))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -157,8 +157,52 @@ func (rcv *ClientLoginReq) OsVersion() []byte {
 	return nil
 }
 
+func (rcv *ClientLoginReq) Memory() int32 {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(32))
+	if o != 0 {
+		return rcv._tab.GetInt32(o + rcv._tab.Pos)
+	}
+	return 0
+}
+
+func (rcv *ClientLoginReq) MutateMemory(n int32) bool {
+	return rcv._tab.MutateInt32Slot(32, n)
+}
+
+func (rcv *ClientLoginReq) OsType() int32 {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(34))
+	if o != 0 {
+		return rcv._tab.GetInt32(o + rcv._tab.Pos)
+	}
+	return 0
+}
+
+func (rcv *ClientLoginReq) MutateOsType(n int32) bool {
+	return rcv._tab.MutateInt32Slot(34, n)
+}
+
+func (rcv *ClientLoginReq) Unk5() int32 {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(36))
+	if o != 0 {
+		return rcv._tab.GetInt32(o + rcv._tab.Pos)
+	}
+	return 0
+}
+
+func (rcv *ClientLoginReq) MutateUnk5(n int32) bool {
+	return rcv._tab.MutateInt32Slot(36, n)
+}
+
+func (rcv *ClientLoginReq) Unk6() []byte {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(38))
+	if o != 0 {
+		return rcv._tab.ByteVector(o + rcv._tab.Pos)
+	}
+	return nil
+}
+
 func ClientLoginReqStart(builder *flatbuffers.Builder) {
-	builder.StartObject(14)
+	builder.StartObject(18)
 }
 func ClientLoginReqAddClientVersion(builder *flatbuffers.Builder, clientVersion flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(0, flatbuffers.UOffsetT(clientVersion), 0)
@@ -196,11 +240,23 @@ func ClientLoginReqAddDeviceId1(builder *flatbuffers.Builder, deviceId1 flatbuff
 func ClientLoginReqAddDeviceId2(builder *flatbuffers.Builder, deviceId2 flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(11, flatbuffers.UOffsetT(deviceId2), 0)
 }
-func ClientLoginReqAddOsBrand(builder *flatbuffers.Builder, osBrand flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(12, flatbuffers.UOffsetT(osBrand), 0)
+func ClientLoginReqAddDeviceModel(builder *flatbuffers.Builder, deviceModel flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(12, flatbuffers.UOffsetT(deviceModel), 0)
 }
 func ClientLoginReqAddOsVersion(builder *flatbuffers.Builder, osVersion flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(13, flatbuffers.UOffsetT(osVersion), 0)
+}
+func ClientLoginReqAddMemory(builder *flatbuffers.Builder, memory int32) {
+	builder.PrependInt32Slot(14, memory, 0)
+}
+func ClientLoginReqAddOsType(builder *flatbuffers.Builder, osType int32) {
+	builder.PrependInt32Slot(15, osType, 0)
+}
+func ClientLoginReqAddUnk5(builder *flatbuffers.Builder, unk5 int32) {
+	builder.PrependInt32Slot(16, unk5, 0)
+}
+func ClientLoginReqAddUnk6(builder *flatbuffers.Builder, unk6 flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(17, flatbuffers.UOffsetT(unk6), 0)
 }
 func ClientLoginReqEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()
