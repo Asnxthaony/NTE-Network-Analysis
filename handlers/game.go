@@ -9,13 +9,14 @@ import (
 
 func init() {
 	Register(1649, handleGameDataFirstSync)
+	Register(1650, handleSingleRecordSync)
 }
 
 // [1649] GameDataFirstSync
 
 type GameDataFirstSync struct {
-	RoleId   uint64
-	GameData []byte
+	RoleId uint64
+	Data   []byte
 }
 
 func handleGameDataFirstSync(payload []byte) (*GameDataFirstSync, error) {
@@ -27,7 +28,25 @@ func handleGameDataFirstSync(payload []byte) (*GameDataFirstSync, error) {
 	cmd := game.GetRootAsGameDataFirstSync(data, 0)
 
 	return &GameDataFirstSync{
-		RoleId:   cmd.RoleId(),
-		GameData: cmd.GameDataBytes(),
+		RoleId: cmd.RoleId(),
+		Data:   cmd.DataBytes(),
+	}, nil
+}
+
+// [1650] SingleRecordSync
+
+type SingleRecordSync struct {
+	RoleId uint64
+	Name   string
+	Data   []byte
+}
+
+func handleSingleRecordSync(payload []byte) (*SingleRecordSync, error) {
+	cmd := game.GetRootAsSingleRecordSync(payload, 0)
+
+	return &SingleRecordSync{
+		RoleId: cmd.RoleId(),
+		Name:   string(cmd.Name()),
+		Data:   cmd.DataBytes(),
 	}, nil
 }

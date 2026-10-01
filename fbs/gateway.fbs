@@ -6,20 +6,20 @@ table ClientLoginReq {
   username: string;       // 9_123456789
   password: string;       // token
   login_type: int32;      // PwrdOneSDKLogin(2)
-  unk1: string;           //
+  unk1: string;           // 
   game_id: string;        // 1289
   channel_id: string;     // laohu_9
   notice_channel: string; // 9_9
-  unk2: string;           //
-  client_wan_ip: string;  //
-  device_id_1: string;    //
-  device_id_2: string;    //
+  unk2: string;           // 
+  client_wan_ip: string;  // 
+  device_id_1: string;    // 
+  device_id_2: string;    // 
   device_model: string;   // Microsoft Windows 11 专业版 / 2512BPNDAC
-  os_version: string;     // 10.0.26200 / 17
+  os_version: string;     // 10.0.26300 / 17
   memory: int32;          // MemStats.AvailablePhysical
   os_type: int32;         // IOS(1), Android(2), PC(4), Harmony(18)
-  unk5: int32;            //
-  unk6: string;           //
+  unk5: int32;            // 
+  unk6: string;           // 
 }
 
 // MSG_ID: 1113
@@ -38,8 +38,8 @@ table ClientTravelCmd {
   unk3: string;         // 
   role_id: uint64;      // 2233****6666
   character_bp: string; // /Game/Blueprints/Character/Player/player_010_nanally.player_010_nanally_C
-  unk_4: string;        //
-  unk_5: int32;         //
+  unk_4: string;        // 
+  unk_5: int32;         // 
   unk_6: int32;         // 1
   unk_7: bool;          // true
   unk_8: int32;         // 
