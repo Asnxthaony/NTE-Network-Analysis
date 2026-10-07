@@ -164,7 +164,7 @@ class CGameDataParser:
         for i in range(record_count):
             rec = self._parse_single_record()
             if rec is None:
-                raise ParseError(f"第 {i} 条记录解析失败")
+                raise ParseError(f"Failed to parse record at index {i}")
             records.append(rec)
 
         return records
