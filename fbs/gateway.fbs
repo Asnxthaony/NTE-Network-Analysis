@@ -2,24 +2,24 @@ namespace gateway;
 
 // MSG_ID: 1106
 table ClientLoginReq {
-  client_version: string; // 20191124
-  username: string;       // 9_123456789
-  password: string;       // token
-  login_type: int32;      // PwrdOneSDKLogin(2)
-  unk1: string;           // 
-  game_id: string;        // 1289
-  channel_id: string;     // laohu_9
-  notice_channel: string; // 9_9
-  unk2: string;           // 
-  client_wan_ip: string;  // 
-  device_id_1: string;    // 
-  device_id_2: string;    // 
-  device_model: string;   // Microsoft Windows 11 专业版 / 2512BPNDAC
-  os_version: string;     // 10.0.26300 / 17
-  memory: int32;          // MemStats.AvailablePhysical
-  os_type: int32;         // IOS(1), Android(2), PC(4), Harmony(18)
-  unk5: int32;            // 
-  unk6: string;           // 
+  client_version: string;   // 20191124
+  username: string;         // 9_123456789
+  password: string;         // token
+  login_type: int32;        // PwrdOneSDKLogin(2)
+  unk1: string;             // 
+  one_app_id: string;       // 1289
+  channel_platform: string; // laohu_9
+  channel_media_id: string; // 9_9
+  unk2: string;             // 
+  client_wan_ip: string;    // 
+  device_id_1: string;      // 
+  device_id_2: string;      // 
+  device_model: string;     // Microsoft Windows 11 专业版 / 2512BPNDAC
+  device_sys: string;       // 10.0.26300 / 17
+  device_memory: int32;     // MemStats.AvailablePhysical
+  os_type: int32;           // IOS(1), Android(2), PC(4), Harmony(18)
+  unk5: int32;              // 
+  unk6: string;             // 
 }
 
 // MSG_ID: 1113

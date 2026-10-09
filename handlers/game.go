@@ -15,7 +15,7 @@ func init() {
 // [1649] GameDataFirstSync
 
 type GameDataFirstSync struct {
-	RoleId uint64
+	RoleID uint64
 	Data   []byte
 }
 
@@ -28,7 +28,7 @@ func handleGameDataFirstSync(payload []byte) (*GameDataFirstSync, error) {
 	cmd := game.GetRootAsGameDataFirstSync(data, 0)
 
 	return &GameDataFirstSync{
-		RoleId: cmd.RoleId(),
+		RoleID: cmd.RoleId(),
 		Data:   cmd.DataBytes(),
 	}, nil
 }
@@ -36,7 +36,7 @@ func handleGameDataFirstSync(payload []byte) (*GameDataFirstSync, error) {
 // [1650] SingleRecordSync
 
 type SingleRecordSync struct {
-	RoleId uint64
+	RoleID uint64
 	Name   string
 	Data   []byte
 }
@@ -45,7 +45,7 @@ func handleSingleRecordSync(payload []byte) (*SingleRecordSync, error) {
 	cmd := game.GetRootAsSingleRecordSync(payload, 0)
 
 	return &SingleRecordSync{
-		RoleId: cmd.RoleId(),
+		RoleID: cmd.RoleId(),
 		Name:   string(cmd.Name()),
 		Data:   cmd.DataBytes(),
 	}, nil

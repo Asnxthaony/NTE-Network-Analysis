@@ -19,48 +19,48 @@ func init() {
 // [1106] ClientLoginReq
 
 type ClientLoginReq struct {
-	ClientVersion string
-	Username      string
-	Password      string
-	LoginType     int32
-	Unk1          string
-	GameId        string
-	ChannelId     string
-	NoticeChannel string
-	Unk2          string
-	ClientWanIp   string
-	DeviceId1     string
-	DeviceId2     string
-	DeviceModel   string
-	OsVersion     string
-	Memory        int32
-	OsType        int32
-	Unk5          int32
-	Unk6          string
+	ClientVersion   string
+	Username        string
+	Password        string
+	LoginType       int32
+	Unk1            string
+	OneAppID        string
+	ChannelPlatform string
+	ChannelMediaID  string
+	Unk2            string
+	ClientWanIP     string
+	DeviceId1       string
+	DeviceId2       string
+	DeviceModel     string
+	DeviceSys       string
+	DeviceMemory    int32
+	OsType          int32
+	Unk5            int32
+	Unk6            string
 }
 
 func handleClientLoginReq(payload []byte) (*ClientLoginReq, error) {
 	req := gateway.GetRootAsClientLoginReq(payload, 0)
 
 	return &ClientLoginReq{
-		ClientVersion: string(req.ClientVersion()),
-		Username:      string(req.Username()),
-		Password:      string(req.Password()),
-		LoginType:     req.LoginType(),
-		Unk1:          string(req.Unk1()),
-		GameId:        string(req.GameId()),
-		ChannelId:     string(req.ChannelId()),
-		NoticeChannel: string(req.NoticeChannel()),
-		Unk2:          string(req.Unk2()),
-		ClientWanIp:   string(req.ClientWanIp()),
-		DeviceId1:     string(req.DeviceId1()),
-		DeviceId2:     string(req.DeviceId2()),
-		DeviceModel:   string(req.DeviceModel()),
-		OsVersion:     string(req.OsVersion()),
-		Memory:        req.Memory(),
-		OsType:        req.OsType(),
-		Unk5:          req.Unk5(),
-		Unk6:          string(req.Unk6()),
+		ClientVersion:   string(req.ClientVersion()),
+		Username:        string(req.Username()),
+		Password:        string(req.Password()),
+		LoginType:       req.LoginType(),
+		Unk1:            string(req.Unk1()),
+		OneAppID:        string(req.OneAppId()),
+		ChannelPlatform: string(req.ChannelPlatform()),
+		ChannelMediaID:  string(req.ChannelMediaId()),
+		Unk2:            string(req.Unk2()),
+		ClientWanIP:     string(req.ClientWanIp()),
+		DeviceId1:       string(req.DeviceId1()),
+		DeviceId2:       string(req.DeviceId2()),
+		DeviceModel:     string(req.DeviceModel()),
+		DeviceSys:       string(req.DeviceSys()),
+		DeviceMemory:    req.DeviceMemory(),
+		OsType:          req.OsType(),
+		Unk5:            req.Unk5(),
+		Unk6:            string(req.Unk6()),
 	}, nil
 }
 
@@ -81,7 +81,7 @@ func handleServerErrorMsgCmd(payload []byte) (*ServerErrorMsgCmd, error) {
 // [1117] ClientTravelCmd
 
 type ClientTravelCmd struct {
-	LoginObjId  uint64
+	LoginObjID  uint64
 	Uid         string
 	Unk2        string
 	ActorTag    string
@@ -101,7 +101,7 @@ func handleClientTravelCmd(payload []byte) (*ClientTravelCmd, error) {
 	cmd := gateway.GetRootAsClientTravelCmd(payload, 0)
 
 	return &ClientTravelCmd{
-		LoginObjId:  cmd.LoginObjId(),
+		LoginObjID:  cmd.LoginObjId(),
 		Uid:         string(cmd.Uid()),
 		Unk2:        string(cmd.Unk2()),
 		ActorTag:    string(cmd.ActorTag()),
@@ -122,12 +122,12 @@ func handleClientTravelCmd(payload []byte) (*ClientTravelCmd, error) {
 
 type ServerVersionCmd struct {
 	ServerVersion       string
-	ClientWanIp         string
+	ClientWanIP         string
 	ClientWanPort       int32
 	HeartType           uint8
 	HeartClientInterval int32
 	CheckServerInterval int32
-	ServerId            int32
+	ServerID            int32
 	ServerTimeUtc       time.Time
 	ServerTime          time.Time
 	Unk1                []byte
@@ -139,12 +139,12 @@ func handleServerVersionCmd(payload []byte) (*ServerVersionCmd, error) {
 
 	return &ServerVersionCmd{
 		ServerVersion:       string(cmd.ServerVersion()),
-		ClientWanIp:         string(cmd.ClientWanIp()),
+		ClientWanIP:         string(cmd.ClientWanIp()),
 		ClientWanPort:       cmd.ClientWanPort(),
 		HeartType:           cmd.HeartType(),
 		HeartClientInterval: cmd.HeartClientInterval(),
 		CheckServerInterval: cmd.CheckServerInterval(),
-		ServerId:            cmd.ServerId(),
+		ServerID:            cmd.ServerId(),
 		ServerTimeUtc:       util.TicksToUnixTime(cmd.ServerTimeUtc()),
 		ServerTime:          util.TicksToUnixTime(cmd.ServerTime()),
 		Unk1:                cmd.Unk1Bytes(),

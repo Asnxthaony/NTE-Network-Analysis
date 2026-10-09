@@ -85,7 +85,7 @@ func (rcv *ClientLoginReq) Unk1() []byte {
 	return nil
 }
 
-func (rcv *ClientLoginReq) GameId() []byte {
+func (rcv *ClientLoginReq) OneAppId() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(14))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -93,7 +93,7 @@ func (rcv *ClientLoginReq) GameId() []byte {
 	return nil
 }
 
-func (rcv *ClientLoginReq) ChannelId() []byte {
+func (rcv *ClientLoginReq) ChannelPlatform() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(16))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -101,7 +101,7 @@ func (rcv *ClientLoginReq) ChannelId() []byte {
 	return nil
 }
 
-func (rcv *ClientLoginReq) NoticeChannel() []byte {
+func (rcv *ClientLoginReq) ChannelMediaId() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(18))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -149,7 +149,7 @@ func (rcv *ClientLoginReq) DeviceModel() []byte {
 	return nil
 }
 
-func (rcv *ClientLoginReq) OsVersion() []byte {
+func (rcv *ClientLoginReq) DeviceSys() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(30))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -157,7 +157,7 @@ func (rcv *ClientLoginReq) OsVersion() []byte {
 	return nil
 }
 
-func (rcv *ClientLoginReq) Memory() int32 {
+func (rcv *ClientLoginReq) DeviceMemory() int32 {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(32))
 	if o != 0 {
 		return rcv._tab.GetInt32(o + rcv._tab.Pos)
@@ -165,7 +165,7 @@ func (rcv *ClientLoginReq) Memory() int32 {
 	return 0
 }
 
-func (rcv *ClientLoginReq) MutateMemory(n int32) bool {
+func (rcv *ClientLoginReq) MutateDeviceMemory(n int32) bool {
 	return rcv._tab.MutateInt32Slot(32, n)
 }
 
@@ -219,14 +219,14 @@ func ClientLoginReqAddLoginType(builder *flatbuffers.Builder, loginType int32) {
 func ClientLoginReqAddUnk1(builder *flatbuffers.Builder, unk1 flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(4, flatbuffers.UOffsetT(unk1), 0)
 }
-func ClientLoginReqAddGameId(builder *flatbuffers.Builder, gameId flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(5, flatbuffers.UOffsetT(gameId), 0)
+func ClientLoginReqAddOneAppId(builder *flatbuffers.Builder, oneAppId flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(5, flatbuffers.UOffsetT(oneAppId), 0)
 }
-func ClientLoginReqAddChannelId(builder *flatbuffers.Builder, channelId flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(6, flatbuffers.UOffsetT(channelId), 0)
+func ClientLoginReqAddChannelPlatform(builder *flatbuffers.Builder, channelPlatform flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(6, flatbuffers.UOffsetT(channelPlatform), 0)
 }
-func ClientLoginReqAddNoticeChannel(builder *flatbuffers.Builder, noticeChannel flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(7, flatbuffers.UOffsetT(noticeChannel), 0)
+func ClientLoginReqAddChannelMediaId(builder *flatbuffers.Builder, channelMediaId flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(7, flatbuffers.UOffsetT(channelMediaId), 0)
 }
 func ClientLoginReqAddUnk2(builder *flatbuffers.Builder, unk2 flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(8, flatbuffers.UOffsetT(unk2), 0)
@@ -243,11 +243,11 @@ func ClientLoginReqAddDeviceId2(builder *flatbuffers.Builder, deviceId2 flatbuff
 func ClientLoginReqAddDeviceModel(builder *flatbuffers.Builder, deviceModel flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(12, flatbuffers.UOffsetT(deviceModel), 0)
 }
-func ClientLoginReqAddOsVersion(builder *flatbuffers.Builder, osVersion flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(13, flatbuffers.UOffsetT(osVersion), 0)
+func ClientLoginReqAddDeviceSys(builder *flatbuffers.Builder, deviceSys flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(13, flatbuffers.UOffsetT(deviceSys), 0)
 }
-func ClientLoginReqAddMemory(builder *flatbuffers.Builder, memory int32) {
-	builder.PrependInt32Slot(14, memory, 0)
+func ClientLoginReqAddDeviceMemory(builder *flatbuffers.Builder, deviceMemory int32) {
+	builder.PrependInt32Slot(14, deviceMemory, 0)
 }
 func ClientLoginReqAddOsType(builder *flatbuffers.Builder, osType int32) {
 	builder.PrependInt32Slot(15, osType, 0)
