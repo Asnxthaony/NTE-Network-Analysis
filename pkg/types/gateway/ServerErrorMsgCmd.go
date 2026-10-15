@@ -41,7 +41,7 @@ func (rcv *ServerErrorMsgCmd) Table() flatbuffers.Table {
 	return rcv._tab
 }
 
-func (rcv *ServerErrorMsgCmd) ErrorMsg() []byte {
+func (rcv *ServerErrorMsgCmd) Msg() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(4))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -52,8 +52,8 @@ func (rcv *ServerErrorMsgCmd) ErrorMsg() []byte {
 func ServerErrorMsgCmdStart(builder *flatbuffers.Builder) {
 	builder.StartObject(1)
 }
-func ServerErrorMsgCmdAddErrorMsg(builder *flatbuffers.Builder, errorMsg flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(0, flatbuffers.UOffsetT(errorMsg), 0)
+func ServerErrorMsgCmdAddMsg(builder *flatbuffers.Builder, msg flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(0, flatbuffers.UOffsetT(msg), 0)
 }
 func ServerErrorMsgCmdEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()

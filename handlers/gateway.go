@@ -14,6 +14,7 @@ func init() {
 	Register(1120, handleServerVersionCmd)
 	Register(1121, handleClientKeepAliveCmd)
 	Register(1122, handleServerKeepAliveCmd)
+	Register(1134, handleClientLogoutRes)
 }
 
 // [1106] ClientLoginReq
@@ -67,14 +68,14 @@ func handleClientLoginReq(payload []byte) (*ClientLoginReq, error) {
 // [1113] ServerErrorMsgCmd
 
 type ServerErrorMsgCmd struct {
-	ErrorMsg string
+	Msg string
 }
 
 func handleServerErrorMsgCmd(payload []byte) (*ServerErrorMsgCmd, error) {
 	cmd := gateway.GetRootAsServerErrorMsgCmd(payload, 0)
 
 	return &ServerErrorMsgCmd{
-		ErrorMsg: string(cmd.ErrorMsg()),
+		Msg: string(cmd.Msg()),
 	}, nil
 }
 
@@ -181,5 +182,19 @@ func handleServerKeepAliveCmd(payload []byte) (*ServerKeepAliveCmd, error) {
 		ServerTick:    cmd.ServerTick(),
 		ServerTimeUtc: util.TicksToUnixTime(cmd.ServerTimeUtc()),
 		ServerTime:    util.TicksToUnixTime(cmd.ServerTime()),
+	}, nil
+}
+
+// [1134] ClientLogoutRes
+
+type ClientLogoutRes struct {
+	Msg string
+}
+
+func handleClientLogoutRes(payload []byte) (*ClientLogoutRes, error) {
+	res := gateway.GetRootAsClientLogoutRes(payload, 0)
+
+	return &ClientLogoutRes{
+		Msg: string(res.Msg()),
 	}, nil
 }

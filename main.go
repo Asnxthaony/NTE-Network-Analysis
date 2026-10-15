@@ -20,6 +20,7 @@ func main() {
 		"data/07_1649_GameDataFirstSync.bin",
 		"data/08_1121_ClientKeepAliveCmd.bin",
 		"data/09_1113_ServerErrorMsgCmd.bin",
+		"data/10_1134_ClientLogoutRes.bin",
 	}
 
 	for _, f := range files {

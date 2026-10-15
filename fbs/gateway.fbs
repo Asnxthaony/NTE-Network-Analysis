@@ -24,7 +24,7 @@ table ClientLoginReq {
 
 // MSG_ID: 1113
 table ServerErrorMsgCmd {
-  error_msg: string; // LoginAuthRes Failed
+  msg: string; // forbidden login by white list!
 }
 
 // MSG_ID: 1117
@@ -70,4 +70,9 @@ table ServerKeepAliveCmd {
   server_tick: uint32;
   server_time_utc: int64;
   server_time: int64;
+}
+
+// MSG_ID: 1134
+table ClientLogoutRes {
+  msg: string; // NoError
 }
