@@ -40,7 +40,7 @@ table ClientTravelCmd {
   character_bp: string; // /Game/Blueprints/Character/Player/player_010_nanally.player_010_nanally_C
   unk_4: string;        // 
   unk_5: int32;         // 
-  unk_6: int32;         // 1
+  unk_6: int32;         // 1 / 3
   unk_7: bool;          // true
   unk_8: int32;         // 
 }
@@ -70,6 +70,11 @@ table ServerKeepAliveCmd {
   server_tick: uint32;
   server_time_utc: int64;
   server_time: int64;
+}
+
+// MSG_ID: 1133
+table ClientLogoutReq {
+  reason: string; // return-main-menu
 }
 
 // MSG_ID: 1134
