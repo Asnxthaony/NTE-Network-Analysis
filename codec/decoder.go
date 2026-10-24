@@ -10,9 +10,9 @@ import (
 )
 
 type Result struct {
-	MsgCode   int32 `json:"msg_code"`
-	ErrorCode int32 `json:"error_code,omitempty"`
-	Body      any   `json:"body"`
+	MsgCode int32 `json:"msg_code"`
+	ErrCode int32 `json:"err_code,omitempty"`
+	Body    any   `json:"body"`
 }
 
 func Decode(filename string) (*Result, error) {
@@ -37,7 +37,7 @@ func DecodeBytes(buf []byte) (*Result, error) {
 
 	head := packet.GetRootAsPacketHead(packetBuf, 0)
 	msgCode := head.MsgCode()
-	errorCode := head.ErrorCode()
+	errCode := head.ErrCode()
 	msgSize := head.MsgSize()
 
 	offset := packetLen - msgSize
@@ -54,8 +54,8 @@ func DecodeBytes(buf []byte) (*Result, error) {
 	}
 
 	return &Result{
-		MsgCode:   msgCode,
-		ErrorCode: errorCode,
-		Body:      msg,
+		MsgCode: msgCode,
+		ErrCode: errCode,
+		Body:    msg,
 	}, nil
 }

@@ -61,7 +61,7 @@ func (rcv *ClientTravelCmd) Uid() []byte {
 	return nil
 }
 
-func (rcv *ClientTravelCmd) Unk2() []byte {
+func (rcv *ClientTravelCmd) Unk1() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(8))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -69,7 +69,7 @@ func (rcv *ClientTravelCmd) Unk2() []byte {
 	return nil
 }
 
-func (rcv *ClientTravelCmd) ActorTag() []byte {
+func (rcv *ClientTravelCmd) SaveInfo() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(10))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -93,7 +93,7 @@ func (rcv *ClientTravelCmd) Location() []byte {
 	return nil
 }
 
-func (rcv *ClientTravelCmd) Unk3() []byte {
+func (rcv *ClientTravelCmd) Unk2() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(16))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -121,7 +121,7 @@ func (rcv *ClientTravelCmd) CharacterBp() []byte {
 	return nil
 }
 
-func (rcv *ClientTravelCmd) Unk4() []byte {
+func (rcv *ClientTravelCmd) Unk3() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(22))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -129,7 +129,7 @@ func (rcv *ClientTravelCmd) Unk4() []byte {
 	return nil
 }
 
-func (rcv *ClientTravelCmd) Unk5() int32 {
+func (rcv *ClientTravelCmd) Unk4() int32 {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(24))
 	if o != 0 {
 		return rcv._tab.GetInt32(o + rcv._tab.Pos)
@@ -137,11 +137,11 @@ func (rcv *ClientTravelCmd) Unk5() int32 {
 	return 0
 }
 
-func (rcv *ClientTravelCmd) MutateUnk5(n int32) bool {
+func (rcv *ClientTravelCmd) MutateUnk4(n int32) bool {
 	return rcv._tab.MutateInt32Slot(24, n)
 }
 
-func (rcv *ClientTravelCmd) Unk6() int32 {
+func (rcv *ClientTravelCmd) Unk5() int32 {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(26))
 	if o != 0 {
 		return rcv._tab.GetInt32(o + rcv._tab.Pos)
@@ -149,11 +149,11 @@ func (rcv *ClientTravelCmd) Unk6() int32 {
 	return 0
 }
 
-func (rcv *ClientTravelCmd) MutateUnk6(n int32) bool {
+func (rcv *ClientTravelCmd) MutateUnk5(n int32) bool {
 	return rcv._tab.MutateInt32Slot(26, n)
 }
 
-func (rcv *ClientTravelCmd) Unk7() bool {
+func (rcv *ClientTravelCmd) Unk6() bool {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(28))
 	if o != 0 {
 		return rcv._tab.GetBool(o + rcv._tab.Pos)
@@ -161,11 +161,11 @@ func (rcv *ClientTravelCmd) Unk7() bool {
 	return false
 }
 
-func (rcv *ClientTravelCmd) MutateUnk7(n bool) bool {
+func (rcv *ClientTravelCmd) MutateUnk6(n bool) bool {
 	return rcv._tab.MutateBoolSlot(28, n)
 }
 
-func (rcv *ClientTravelCmd) Unk8() int32 {
+func (rcv *ClientTravelCmd) Unk7() int32 {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(30))
 	if o != 0 {
 		return rcv._tab.GetInt32(o + rcv._tab.Pos)
@@ -173,7 +173,7 @@ func (rcv *ClientTravelCmd) Unk8() int32 {
 	return 0
 }
 
-func (rcv *ClientTravelCmd) MutateUnk8(n int32) bool {
+func (rcv *ClientTravelCmd) MutateUnk7(n int32) bool {
 	return rcv._tab.MutateInt32Slot(30, n)
 }
 
@@ -186,11 +186,11 @@ func ClientTravelCmdAddLoginObjId(builder *flatbuffers.Builder, loginObjId uint6
 func ClientTravelCmdAddUid(builder *flatbuffers.Builder, uid flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(1, flatbuffers.UOffsetT(uid), 0)
 }
-func ClientTravelCmdAddUnk2(builder *flatbuffers.Builder, unk2 flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(2, flatbuffers.UOffsetT(unk2), 0)
+func ClientTravelCmdAddUnk1(builder *flatbuffers.Builder, unk1 flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(2, flatbuffers.UOffsetT(unk1), 0)
 }
-func ClientTravelCmdAddActorTag(builder *flatbuffers.Builder, actorTag flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(3, flatbuffers.UOffsetT(actorTag), 0)
+func ClientTravelCmdAddSaveInfo(builder *flatbuffers.Builder, saveInfo flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(3, flatbuffers.UOffsetT(saveInfo), 0)
 }
 func ClientTravelCmdAddServerAddr(builder *flatbuffers.Builder, serverAddr flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(4, flatbuffers.UOffsetT(serverAddr), 0)
@@ -198,8 +198,8 @@ func ClientTravelCmdAddServerAddr(builder *flatbuffers.Builder, serverAddr flatb
 func ClientTravelCmdAddLocation(builder *flatbuffers.Builder, location flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(5, flatbuffers.UOffsetT(location), 0)
 }
-func ClientTravelCmdAddUnk3(builder *flatbuffers.Builder, unk3 flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(6, flatbuffers.UOffsetT(unk3), 0)
+func ClientTravelCmdAddUnk2(builder *flatbuffers.Builder, unk2 flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(6, flatbuffers.UOffsetT(unk2), 0)
 }
 func ClientTravelCmdAddRoleId(builder *flatbuffers.Builder, roleId uint64) {
 	builder.PrependUint64Slot(7, roleId, 0)
@@ -207,20 +207,20 @@ func ClientTravelCmdAddRoleId(builder *flatbuffers.Builder, roleId uint64) {
 func ClientTravelCmdAddCharacterBp(builder *flatbuffers.Builder, characterBp flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(8, flatbuffers.UOffsetT(characterBp), 0)
 }
-func ClientTravelCmdAddUnk4(builder *flatbuffers.Builder, unk4 flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(9, flatbuffers.UOffsetT(unk4), 0)
+func ClientTravelCmdAddUnk3(builder *flatbuffers.Builder, unk3 flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(9, flatbuffers.UOffsetT(unk3), 0)
+}
+func ClientTravelCmdAddUnk4(builder *flatbuffers.Builder, unk4 int32) {
+	builder.PrependInt32Slot(10, unk4, 0)
 }
 func ClientTravelCmdAddUnk5(builder *flatbuffers.Builder, unk5 int32) {
-	builder.PrependInt32Slot(10, unk5, 0)
+	builder.PrependInt32Slot(11, unk5, 0)
 }
-func ClientTravelCmdAddUnk6(builder *flatbuffers.Builder, unk6 int32) {
-	builder.PrependInt32Slot(11, unk6, 0)
+func ClientTravelCmdAddUnk6(builder *flatbuffers.Builder, unk6 bool) {
+	builder.PrependBoolSlot(12, unk6, false)
 }
-func ClientTravelCmdAddUnk7(builder *flatbuffers.Builder, unk7 bool) {
-	builder.PrependBoolSlot(12, unk7, false)
-}
-func ClientTravelCmdAddUnk8(builder *flatbuffers.Builder, unk8 int32) {
-	builder.PrependInt32Slot(13, unk8, 0)
+func ClientTravelCmdAddUnk7(builder *flatbuffers.Builder, unk7 int32) {
+	builder.PrependInt32Slot(13, unk7, 0)
 }
 func ClientTravelCmdEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()

@@ -1,7 +1,7 @@
 namespace packet;
 
 table PacketHead {
-  msg_code:   int32;
-  error_code: int32;
-  msg_size:   int32;
+  msg_code: int32;
+  err_code: int32;
+  msg_size: int32;
 }

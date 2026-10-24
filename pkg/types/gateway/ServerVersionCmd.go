@@ -175,7 +175,7 @@ func (rcv *ServerVersionCmd) MutateUnk1(j int, n byte) bool {
 	return false
 }
 
-func (rcv *ServerVersionCmd) Unk2() []byte {
+func (rcv *ServerVersionCmd) MapName() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(24))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -219,8 +219,8 @@ func ServerVersionCmdAddUnk1(builder *flatbuffers.Builder, unk1 flatbuffers.UOff
 func ServerVersionCmdStartUnk1Vector(builder *flatbuffers.Builder, numElems int) flatbuffers.UOffsetT {
 	return builder.StartVector(1, numElems, 1)
 }
-func ServerVersionCmdAddUnk2(builder *flatbuffers.Builder, unk2 flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(10, flatbuffers.UOffsetT(unk2), 0)
+func ServerVersionCmdAddMapName(builder *flatbuffers.Builder, mapName flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(10, flatbuffers.UOffsetT(mapName), 0)
 }
 func ServerVersionCmdEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()

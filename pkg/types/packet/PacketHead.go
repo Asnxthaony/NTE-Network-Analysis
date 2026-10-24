@@ -53,7 +53,7 @@ func (rcv *PacketHead) MutateMsgCode(n int32) bool {
 	return rcv._tab.MutateInt32Slot(4, n)
 }
 
-func (rcv *PacketHead) ErrorCode() int32 {
+func (rcv *PacketHead) ErrCode() int32 {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(6))
 	if o != 0 {
 		return rcv._tab.GetInt32(o + rcv._tab.Pos)
@@ -61,7 +61,7 @@ func (rcv *PacketHead) ErrorCode() int32 {
 	return 0
 }
 
-func (rcv *PacketHead) MutateErrorCode(n int32) bool {
+func (rcv *PacketHead) MutateErrCode(n int32) bool {
 	return rcv._tab.MutateInt32Slot(6, n)
 }
 
@@ -83,8 +83,8 @@ func PacketHeadStart(builder *flatbuffers.Builder) {
 func PacketHeadAddMsgCode(builder *flatbuffers.Builder, msgCode int32) {
 	builder.PrependInt32Slot(0, msgCode, 0)
 }
-func PacketHeadAddErrorCode(builder *flatbuffers.Builder, errorCode int32) {
-	builder.PrependInt32Slot(1, errorCode, 0)
+func PacketHeadAddErrCode(builder *flatbuffers.Builder, errCode int32) {
+	builder.PrependInt32Slot(1, errCode, 0)
 }
 func PacketHeadAddMsgSize(builder *flatbuffers.Builder, msgSize int32) {
 	builder.PrependInt32Slot(2, msgSize, 0)

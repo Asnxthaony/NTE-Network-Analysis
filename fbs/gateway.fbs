@@ -6,11 +6,11 @@ table ClientLoginReq {
   username: string;         // 9_123456789
   password: string;         // token
   login_type: int32;        // PwrdOneSDKLogin(2)
-  unk1: string;             // 
+  unk_1: string;            // 
   one_app_id: string;       // 1289
   channel_platform: string; // laohu_9
   channel_media_id: string; // 9_9
-  unk2: string;             // 
+  unk_2: string;            // 
   client_wan_ip: string;    // 
   device_id_1: string;      // 
   device_id_2: string;      // 
@@ -18,8 +18,8 @@ table ClientLoginReq {
   device_sys: string;       // 10.0.26300 / 17
   device_memory: int32;     // MemStats.AvailablePhysical
   os_type: int32;           // IOS(1), Android(2), PC(4), Harmony(18)
-  unk5: int32;              // 
-  unk6: string;             // 
+  unk_3: int32;             // 
+  unk_4: string;            // 
 }
 
 // MSG_ID: 1113
@@ -31,18 +31,18 @@ table ServerErrorMsgCmd {
 table ClientTravelCmd {
   login_obj_id: uint64; // 114514
   uid: string;          // 9_123456789
-  unk2: string;         // 
-  actor_tag: string;    // TagOthers
+  unk_1: string;        // 
+  save_info: string;    // TagOthers
   server_addr: string;  // 1.2.3.4:8888
   location: string;     // X,Y,Z|Pitch,Yaw,Roll|ScaleX,ScaleY,ScaleZ
-  unk3: string;         // 
+  unk_2: string;        // 
   role_id: uint64;      // 2233****6666
   character_bp: string; // /Game/Blueprints/Character/Player/player_010_nanally.player_010_nanally_C
-  unk_4: string;        // 
-  unk_5: int32;         // 
-  unk_6: int32;         // 1 / 3
-  unk_7: bool;          // true
-  unk_8: int32;         // 
+  unk_3: string;        // 
+  unk_4: int32;         // 
+  unk_5: int32;         // 1 / 3
+  unk_6: bool;          // true
+  unk_7: int32;         // 
 }
 
 // MSG_ID: 1120
@@ -56,8 +56,8 @@ table ServerVersionCmd {
   server_id: int32;             // 14001
   server_time_utc: int64;       // 
   server_time: int64;           // 
-  unk1: [ubyte];                // 
-  unk2: string;                 // 
+  unk_1: [ubyte];               // 
+  map_name: string;             // XL_map_bigworld_test
 }
 
 // MSG_ID: 1121

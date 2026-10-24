@@ -181,7 +181,7 @@ func (rcv *ClientLoginReq) MutateOsType(n int32) bool {
 	return rcv._tab.MutateInt32Slot(34, n)
 }
 
-func (rcv *ClientLoginReq) Unk5() int32 {
+func (rcv *ClientLoginReq) Unk3() int32 {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(36))
 	if o != 0 {
 		return rcv._tab.GetInt32(o + rcv._tab.Pos)
@@ -189,11 +189,11 @@ func (rcv *ClientLoginReq) Unk5() int32 {
 	return 0
 }
 
-func (rcv *ClientLoginReq) MutateUnk5(n int32) bool {
+func (rcv *ClientLoginReq) MutateUnk3(n int32) bool {
 	return rcv._tab.MutateInt32Slot(36, n)
 }
 
-func (rcv *ClientLoginReq) Unk6() []byte {
+func (rcv *ClientLoginReq) Unk4() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(38))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
@@ -252,11 +252,11 @@ func ClientLoginReqAddDeviceMemory(builder *flatbuffers.Builder, deviceMemory in
 func ClientLoginReqAddOsType(builder *flatbuffers.Builder, osType int32) {
 	builder.PrependInt32Slot(15, osType, 0)
 }
-func ClientLoginReqAddUnk5(builder *flatbuffers.Builder, unk5 int32) {
-	builder.PrependInt32Slot(16, unk5, 0)
+func ClientLoginReqAddUnk3(builder *flatbuffers.Builder, unk3 int32) {
+	builder.PrependInt32Slot(16, unk3, 0)
 }
-func ClientLoginReqAddUnk6(builder *flatbuffers.Builder, unk6 flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(17, flatbuffers.UOffsetT(unk6), 0)
+func ClientLoginReqAddUnk4(builder *flatbuffers.Builder, unk4 flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(17, flatbuffers.UOffsetT(unk4), 0)
 }
 func ClientLoginReqEnd(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	return builder.EndObject()

@@ -37,8 +37,8 @@ type ClientLoginReq struct {
 	DeviceSys       string
 	DeviceMemory    int32
 	OsType          int32
-	Unk5            int32
-	Unk6            string
+	Unk3            int32
+	Unk4            string
 }
 
 func handleClientLoginReq(payload []byte) (*ClientLoginReq, error) {
@@ -61,8 +61,8 @@ func handleClientLoginReq(payload []byte) (*ClientLoginReq, error) {
 		DeviceSys:       string(req.DeviceSys()),
 		DeviceMemory:    req.DeviceMemory(),
 		OsType:          req.OsType(),
-		Unk5:            req.Unk5(),
-		Unk6:            string(req.Unk6()),
+		Unk3:            req.Unk3(),
+		Unk4:            string(req.Unk4()),
 	}, nil
 }
 
@@ -85,18 +85,18 @@ func handleServerErrorMsgCmd(payload []byte) (*ServerErrorMsgCmd, error) {
 type ClientTravelCmd struct {
 	LoginObjID  uint64
 	Uid         string
-	Unk2        string
-	ActorTag    string
+	Unk1        string
+	SaveInfo    string
 	ServerAddr  string
 	Location    string
-	Unk3        string
+	Unk2        string
 	RoleId      uint64
 	CharacterBp string
-	Unk4        string
+	Unk3        string
+	Unk4        int32
 	Unk5        int32
-	Unk6        int32
-	Unk7        bool
-	Unk8        int32
+	Unk6        bool
+	Unk7        int32
 }
 
 func handleClientTravelCmd(payload []byte) (*ClientTravelCmd, error) {
@@ -105,18 +105,18 @@ func handleClientTravelCmd(payload []byte) (*ClientTravelCmd, error) {
 	return &ClientTravelCmd{
 		LoginObjID:  cmd.LoginObjId(),
 		Uid:         string(cmd.Uid()),
-		Unk2:        string(cmd.Unk2()),
-		ActorTag:    string(cmd.ActorTag()),
+		Unk1:        string(cmd.Unk1()),
+		SaveInfo:    string(cmd.SaveInfo()),
 		ServerAddr:  string(cmd.ServerAddr()),
 		Location:    string(cmd.Location()),
-		Unk3:        string(cmd.Unk3()),
+		Unk2:        string(cmd.Unk2()),
 		RoleId:      cmd.RoleId(),
 		CharacterBp: string(cmd.CharacterBp()),
-		Unk4:        string(cmd.Unk4()),
+		Unk3:        string(cmd.Unk3()),
+		Unk4:        cmd.Unk4(),
 		Unk5:        cmd.Unk5(),
 		Unk6:        cmd.Unk6(),
 		Unk7:        cmd.Unk7(),
-		Unk8:        cmd.Unk8(),
 	}, nil
 }
 
@@ -133,7 +133,7 @@ type ServerVersionCmd struct {
 	ServerTimeUtc       time.Time
 	ServerTime          time.Time
 	Unk1                []byte
-	Unk2                string
+	MapName             string
 }
 
 func handleServerVersionCmd(payload []byte) (*ServerVersionCmd, error) {
@@ -150,7 +150,7 @@ func handleServerVersionCmd(payload []byte) (*ServerVersionCmd, error) {
 		ServerTimeUtc:       util.TicksToUnixTime(cmd.ServerTimeUtc()),
 		ServerTime:          util.TicksToUnixTime(cmd.ServerTime()),
 		Unk1:                cmd.Unk1Bytes(),
-		Unk2:                string(cmd.Unk2()),
+		MapName:             string(cmd.MapName()),
 	}, nil
 }
 
