@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/Asnxthaony/NTE-Network-Analysis/pkg/types/gateway"
@@ -92,7 +93,7 @@ type ClientTravelCmd struct {
 	Unk2        string
 	RoleId      uint64
 	CharacterBp string
-	Unk3        string
+	PlayerState []byte
 	Unk4        int32
 	Unk5        int32
 	Unk6        bool
@@ -101,6 +102,15 @@ type ClientTravelCmd struct {
 
 func handleClientTravelCmd(payload []byte) (*ClientTravelCmd, error) {
 	cmd := gateway.GetRootAsClientTravelCmd(payload, 0)
+
+	var playerState []byte
+	if cmd.PlayerStateLength() != 0 {
+		var err error
+		playerState, err = util.UncompressLz4(cmd.PlayerStateBytes())
+		if err != nil {
+			return nil, fmt.Errorf("failed to uncompress PlayerState: %w", err)
+		}
+	}
 
 	return &ClientTravelCmd{
 		LoginObjID:  cmd.LoginObjId(),
@@ -112,7 +122,7 @@ func handleClientTravelCmd(payload []byte) (*ClientTravelCmd, error) {
 		Unk2:        string(cmd.Unk2()),
 		RoleId:      cmd.RoleId(),
 		CharacterBp: string(cmd.CharacterBp()),
-		Unk3:        string(cmd.Unk3()),
+		PlayerState: playerState,
 		Unk4:        cmd.Unk4(),
 		Unk5:        cmd.Unk5(),
 		Unk6:        cmd.Unk6(),

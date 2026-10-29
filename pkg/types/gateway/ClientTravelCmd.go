@@ -121,12 +121,38 @@ func (rcv *ClientTravelCmd) CharacterBp() []byte {
 	return nil
 }
 
-func (rcv *ClientTravelCmd) Unk3() []byte {
+func (rcv *ClientTravelCmd) PlayerState(j int) byte {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(22))
+	if o != 0 {
+		a := rcv._tab.Vector(o)
+		return rcv._tab.GetByte(a + flatbuffers.UOffsetT(j*1))
+	}
+	return 0
+}
+
+func (rcv *ClientTravelCmd) PlayerStateLength() int {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(22))
+	if o != 0 {
+		return rcv._tab.VectorLen(o)
+	}
+	return 0
+}
+
+func (rcv *ClientTravelCmd) PlayerStateBytes() []byte {
 	o := flatbuffers.UOffsetT(rcv._tab.Offset(22))
 	if o != 0 {
 		return rcv._tab.ByteVector(o + rcv._tab.Pos)
 	}
 	return nil
+}
+
+func (rcv *ClientTravelCmd) MutatePlayerState(j int, n byte) bool {
+	o := flatbuffers.UOffsetT(rcv._tab.Offset(22))
+	if o != 0 {
+		a := rcv._tab.Vector(o)
+		return rcv._tab.MutateByte(a+flatbuffers.UOffsetT(j*1), n)
+	}
+	return false
 }
 
 func (rcv *ClientTravelCmd) Unk4() int32 {
@@ -207,8 +233,11 @@ func ClientTravelCmdAddRoleId(builder *flatbuffers.Builder, roleId uint64) {
 func ClientTravelCmdAddCharacterBp(builder *flatbuffers.Builder, characterBp flatbuffers.UOffsetT) {
 	builder.PrependUOffsetTSlot(8, flatbuffers.UOffsetT(characterBp), 0)
 }
-func ClientTravelCmdAddUnk3(builder *flatbuffers.Builder, unk3 flatbuffers.UOffsetT) {
-	builder.PrependUOffsetTSlot(9, flatbuffers.UOffsetT(unk3), 0)
+func ClientTravelCmdAddPlayerState(builder *flatbuffers.Builder, playerState flatbuffers.UOffsetT) {
+	builder.PrependUOffsetTSlot(9, flatbuffers.UOffsetT(playerState), 0)
+}
+func ClientTravelCmdStartPlayerStateVector(builder *flatbuffers.Builder, numElems int) flatbuffers.UOffsetT {
+	return builder.StartVector(1, numElems, 1)
 }
 func ClientTravelCmdAddUnk4(builder *flatbuffers.Builder, unk4 int32) {
 	builder.PrependInt32Slot(10, unk4, 0)
